@@ -66,7 +66,8 @@ def serve(
         server._setup_logging = lambda: None  # noqa: SLF001
 
         for path in paths_to_watch:
-            if path != None:
+            # E.g. if there is no config file present.
+            if path is not None:
                 logger.info(f"Watching: '{path}'")
                 server.watch(filepath=path.as_posix(), func=debounced_reload)
 
